@@ -11,6 +11,8 @@ export default class Dasboard extends Component {
         this.state = {
             houses: []
         } 
+
+        this.deleteHousee = this.deleteHouse.bind(this)
     }
 
     componentDidMount() {
@@ -21,13 +23,31 @@ export default class Dasboard extends Component {
         });
     }
 
+    deleteHouse(id) {
+
+        axios.delete(`/api/house/${id}`).then(res => {
+            console.log(res)
+        });
+    }
+
     render() {
-        const mappedHouses = this.state.houses.map(house => house);
+        const mappedHouses = this.state.houses.map(house => {
+            return (
+                <House 
+                id={house.id}
+                name={house.name}
+                address={house.address}
+                city={house.city}
+                state={house.state}
+                zipcode={house.zipcode}
+                deleteHouse={this.deleteHouse}
+                />
+            )
+        });
 
         return (
             <div>
                 Dashboard
-                <House />
 
                 <Link to={'/wizard'}>
                 <button onClick={() => Wizard}>Add New Property</button>

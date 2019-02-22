@@ -23,8 +23,8 @@ massive(CONNECTION_STRING).then(db => {
 });
 
 app.get(`/api/houses`, ctrl.getHouses);
-// app.post(`/api/house`);
+app.post(`/api/house`, ctrl.createHouse);
 // app.put(`/api/house/:id`);
-// app.delete(`/api/house/:id`);
+app.delete('/api/house/:id', ctrl.deleteHouse);
 
 app.listen(SERVER_PORT, () => console.log(`Pandas on ${SERVER_PORT}`));

@@ -1,6 +1,8 @@
 import React, {Component}  from 'react'; 
 import Dashboard from './Dashboard'
 import {Link} from 'react-router-dom';
+import axios from 'axios';
+
 
 export default class Wizard extends Component {
     constructor() {
@@ -47,6 +49,19 @@ export default class Wizard extends Component {
 
 
 
+    createHouse() {
+        const {name, address, city, state, zipcode} = this.state
+        axios.post(`/api/house`, {name, address, city, state, zipcode}).then( () => {
+            this.setState({
+                name: '',
+                address: '',
+                city: '',
+                state: '',
+                zipcode: ''
+            });
+        });
+    }
+
     render() {
         return (
             <div>
@@ -78,6 +93,8 @@ export default class Wizard extends Component {
                 type='text'
                 onChange={(e) => this.handleZipcode(e.target.value)}
                 value={this.state.zipcode}/>
+
+                <button onClick={() => this.createHouse()}>Complete</button>
             </div>
         )
     }
