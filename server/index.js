@@ -6,6 +6,8 @@ const massive = require('massive');
 
 const {CONNECTION_STRING, SESSION_SECRET, SERVER_PORT} = process.env;
 
+//Controllers
+
 const app = express();
 
 app.use(json());
@@ -17,9 +19,10 @@ app.use(session({
 }));
 
 massive(CONNECTION_STRING).then(db => {
-    console.log(`We got broads on ${CONNECTION_STRING}`);
+    console.log(`We got broads in HOU`);
     app.set('db', db)
 });
 
+//CRUD
 
 app.listen(SERVER_PORT, () => console.log(`Pandas on ${SERVER_PORT}`));
