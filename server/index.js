@@ -3,10 +3,9 @@ const express = require('express');
 const {json} = require('body-parser');
 const session = require('express-session');
 const massive = require('massive');
+const ctrl = require('./controller');
 
 const {CONNECTION_STRING, SESSION_SECRET, SERVER_PORT} = process.env;
-
-//Controllers
 
 const app = express();
 
@@ -23,6 +22,9 @@ massive(CONNECTION_STRING).then(db => {
     app.set('db', db)
 });
 
-//CRUD
+app.get(`/api/houses`, ctrl.getHouses);
+// app.post(`/api/house`);
+// app.put(`/api/house/:id`);
+// app.delete(`/api/house/:id`);
 
 app.listen(SERVER_PORT, () => console.log(`Pandas on ${SERVER_PORT}`));
